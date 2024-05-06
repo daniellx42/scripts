@@ -30,8 +30,6 @@ SUCCESS=$(printf "\e[1;32m [ OK ] \e[0m")
 ERROR=$(printf "\e[1;31m [ ERROR ] \e[0m")
 
 select_option() {
-    # colors
-
     # little helpers for terminal print control and key input
     ESC=$(printf "\033")
     cursor_blink_on() { printf "$ESC[?25h"; }
@@ -99,7 +97,7 @@ select_option() {
 
 main() {
     clear
-    ### install dependencies
+    # install dependencies
     sudo pacman -S git zsh alacritty base-devel
     # install yay
     git clone https://aur.archlinux.org/yay.git && cd yay && makepkg -si
@@ -111,23 +109,24 @@ main() {
     sudo pacman -S noto-fonts ttf-hack ttf-ubuntu-font-family ttf-fira-code
     # instalar ícons
     sudo pacman -S papirus-icon-theme adwaita-icon-theme
-    ### install oh-my-zsh
+    # install oh-my-zsh
     sh -c "$(curl -fsSL $ohmyzsh)"
-    ### theme and plugins
+    # clone plugins repositories
+    for ((i = 0; i < ${#clone_plugins[@]}; i++)); do
+        sudo git clone --depth 1 -- ${clone_plugins[i]} ${ZSH_CUSTOM:-$HOME/.oh-my-zsh/custom}/plugins/${themes_path[i]}
+    done
+    # added theme and plugins
     echo "Escolha um tema:"
     options=("robbyrussell" "xiong-chiamiov-plus")
     select_option "${options[@]}"
     choice=$?
-
-    for ((i = 0; i < ${#clone_plugins[@]}; i++)); do
-        sudo git clone --depth 1 -- ${clone_plugins[i]} ${ZSH_CUSTOM:-$HOME/.oh-my-zsh/custom}/plugins/${themes_path[i]}
-    done
-
     sed -i "s/^plugins=.*/plugins=(${plugins})/" ~/.zshrc
     sed -i "s/^ZSH_THEME=.*/ZSH_THEME=\"${options[$choice]}\"/" ~/.zshrc
     echo -e "${options[$choice]} $SUCCESS"
+    #added variables in .zshrc
     echo "$histsize_histfile" >>~/.zshrc
     echo -e "added variables $SUCCESS"
+
     echo -e "$GREEN Finished $END $SUCCESS"
 }
 
