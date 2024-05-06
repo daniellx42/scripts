@@ -13,7 +13,6 @@ themes_path=(
     "zsh-syntax-highlighting"
     "fast-syntax-highlighting"
     "zsh-autocomplete")
-# variables
 histsize_histfile="
 ### variables zsh histsize and histfile
 export HISTSIZE=100000
@@ -23,19 +22,16 @@ export HISTCONTROL=ignoredups:ignorespace
 # exa
 alias ls=\"exa --icons\"
 "
-
 # colors
-CYAN='\e[96m'
-GREEN='\e[92m'
-RESET='\e[0m'
-SUCCESS="\e[1;32m [ OK ] \e[0m"
-ERROR="\e[1;31m [ ERROR ] \e[0m"
+CYAN='\e[96m'$(printf "\e[96m")
+GREEN=$(printf "\e[1;32m")
+END=$(printf "\e[0m")
+SUCCESS=$(printf "\e[1;32m [ OK ] \e[0m")
+ERROR=$(printf "\e[1;31m [ ERROR ] \e[0m")
 
 select_option() {
-
     # colors
-    GREEN=$(printf "\e[1;32m")
-    END=$(printf "\e[0m")
+
     # little helpers for terminal print control and key input
     ESC=$(printf "\033")
     cursor_blink_on() { printf "$ESC[?25h"; }
@@ -101,7 +97,6 @@ select_option() {
     return $selected
 }
 
-
 main() {
     clear
     ### install dependencies
@@ -127,12 +122,13 @@ main() {
     for ((i = 0; i < ${#clone_plugins[@]}; i++)); do
         sudo git clone --depth 1 -- ${clone_plugins[i]} ${ZSH_CUSTOM:-$HOME/.oh-my-zsh/custom}/plugins/${themes_path[i]}
     done
+
     sed -i "s/^plugins=.*/plugins=(${plugins})/" ~/.zshrc
-    echo -e "${options[$choice]} $SUCCESS"
     sed -i "s/^ZSH_THEME=.*/ZSH_THEME=\"${options[$choice]}\"/" ~/.zshrc
-
-    echo "$histsize_histfile" >> ~/.zshrc
-
+    echo -e "${options[$choice]} $SUCCESS"
+    echo "$histsize_histfile" >>~/.zshrc
+    echo -e "added variables $SUCCESS"
+    echo -e "$GREEN Finished $END $SUCCESS"
 }
 
 main
