@@ -2,22 +2,9 @@
 ```md
 - [ x ] (Linux System)
 ```
-| Libraries installed |
-| ----------- |
-| git ; zsh ; alacritty ; base-devel |
-
-| Fonts installed |
-| ----------- |
-| noto-fonts ; ttf-hack ; ttf-ubuntu-font-family ; ttf-fira-code |
-
-| Icons installed |
-| ----------- |
-| papirus-icon-theme ; adwaita-icon-theme |
-
-| YAY - for Arch Linux |
-| ----------- |
-| Yet Another Yogurt - An AUR Helper Written in Go |
-
-| Rust - packages installed with cargo |
-| ----------- |
-| eza - A modern, maintained replacement for ls. |
+| Libraries installed | Fonts installed |  Icons installed | Others
+| ----------- | ----------- | ----------- | ----------- |
+| git | noto-fonts | papirus-icon-theme | **YAY** - for Arch Linux - Yet Another Yogurt - An AUR Helper Written in Go |
+|zsh | ttf-hack | adwaita-icon-theme | **Rust** - packages installed with **cargo** - **eza** - A modern, maintained replacement for ls. |
+|alacritty | ttf-ubuntu-font-family |
+|base-devel | ttf-fira-code |
