@@ -1,4 +1,4 @@
-# Custom Terminal Linux
+# Custom Terminal Linux - buildterm.sh
 ```md
 - [ x ] (Linux System)
 ```
