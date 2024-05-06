@@ -105,8 +105,8 @@ main() {
     git clone https://aur.archlinux.org/yay.git && cd yay && makepkg -si
     # install rust
     curl --proto '=https' --tlsv1.2 -sSf https://sh.rustup.rs | sh
-    # install icons exa
-    cargo install exa
+    # install icons eza
+    cargo install eza
     # instalar fonts
     sudo pacman -S noto-fonts ttf-hack ttf-ubuntu-font-family ttf-fira-code
     # instalar ícons
